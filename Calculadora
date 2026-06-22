@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Calculator</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19; /* Fundo escuro igual ao portfólio */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container da Calculadora */
+        .calculadora {
+            background-color: #171e30;
+            border: 1px solid #232d45;
+            border-radius: 12px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Visor */
+        #visor {
+            width: 100%;
+            height: 60px;
+            background-color: #0b0f19;
+            border: 1px solid #232d45;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1.8rem;
+            text-align: right;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        /* Grade de Botões */
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .botoes button {
+            height: 55px;
+            background-color: #232d45;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        /* Efeito de hover geral */
+        .botoes button:hover {
+            background-color: #4da6ff;
+            color: #0b0f19;
+        }
+
+        /* Botão Limpar (C) */
+        .btn-limpar {
+            background-color: #ef4444 !important;
+            color: white !important;
+        }
+        .btn-limpar:hover {
+            background-color: #dc2626 !important;
+        }
+
+        /* Botão Igual (=) */
+        .btn-igual {
+            grid-row: span 2;
+            height: 122px !important;
+            background-color: #4da6ff !important;
+            color: #0b0f19 !important;
+        }
+        .btn-igual:hover {
+            background-color: #3399ff !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculadora">
+        <input type="text" id="visor" readonly placeholder="0">
+        
+        <div class="botoes">
+            <button onclick="limparVisor()" class="btn-limpar">C</button>
+            <button onclick="adicionarValor('/')">/</button>
+            <button onclick="adicionarValor('*')">*</button>
+            <button onclick="adicionarValor('-')">-</button>
+            
+            <button onclick="adicionarValor('7')">7</button>
+            <button onclick="adicionarValor('8')">8</button>
+            <button onclick="adicionarValor('9')">9</button>
+            <button onclick="adicionarValor('+')">+</button>
+            
+            <button onclick="adicionarValor('4')">4</button>
+            <button onclick="adicionarValor('5')">5</button>
+            <button onclick="adicionarValor('6')">6</button>
+            <button onclick="calcularResultado()" class="btn-igual">=</button>
+            
+            <button onclick="adicionarValor('1')">1</button>
+            <button onclick="adicionarValor('2')">2</button>
+            <button onclick="adicionarValor('3')">3</button>
+            <button onclick="adicionarValor('0')">0</button>
+        </div>
+    </div>
+
+    <script>
+        const visor = document.getElementById('visor');
+
+        function adicionarValor(valor) {
+            visor.value += valor;
+        }
+
+        function limparVisor() {
+            visor.value = '';
+        }
+
+        function calcularResultado() {
+            try {
+                if (visor.value !== '') {
+                    // Executa a string matemática inserida no visor
+                    visor.value = eval(visor.value);
+                }
+            } catch (error) {
+                visor.value = 'Erro';
+            }
+        }
+    </script>
+</body>
+</html>
